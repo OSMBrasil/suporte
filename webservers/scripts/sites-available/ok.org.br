@@ -1,0 +1,184 @@
+##
+# Servidores OK.ORG.BR
+##
+
+server {
+        server_name ok.org.br www.ok.org.br;
+        location / {
+                proxy_pass http://br.okfn.org;
+        }
+        include snippets/ssl-oficial.news.conf;
+} #end server
+
+server {
+        server_name tv.ok.org.br;
+        location / {
+                proxy_pass http://www.youtube.com/user/okfnbr;
+        }
+        include snippets/ssl-oficial.news.conf;
+} #end server
+
+
+server {
+        server_name discus.ok.org.br discuss.ok.org.br;
+        location / {
+                rewrite
+                  ^/?$
+                  http://discuss.okfn.org/c/local-groups/okbr
+                  break;
+                rewrite
+                  ^/?(\d+)$
+                  http://discuss.okfn.org/t/$1
+                  break;
+                rewrite
+                  ^/?tags/(.+)$
+                  http://discuss.okfn.org/tags/$1
+                  break;
+                rewrite
+                  ^/?(t/.+)$
+                  http://discuss.okfn.org/$1
+                  break;
+                rewrite
+                  ^/?(.+)$
+                  http://discuss.okfn.org/t/$1
+                  break;
+        }
+        include snippets/ssl-oficial.news.conf;
+} #end server
+
+server {
+        server_name datasets.ok.org.br;
+        location / { proxy_pass http://github.com/datasets-br; }
+        include snippets/ssl-oficial.news.conf;
+}
+
+server {
+        server_name fotos.ok.org.br;
+        location / { proxy_pass  http://www.flickr.com/search/?w=all&q=okfnbr&m=tags; }
+        include snippets/ssl-oficial.news.conf;
+}
+
+server {
+        server_name  suporte.ok.org.br;
+
+        root   /var/www/suporte.ok.org.br;
+        index  index.html index.htm;
+
+#falta root redirecionar para index.htm!
+
+        location / {
+                rewrite
+                  ^/?git$
+                  http://github.com/okfn-brasil/suporte
+                  break;
+                rewrite
+                  ^/?([vV][\.\d]+)$
+                  http://github.com/okfn-brasil/suporte/tree/$1​
+                  break;
+                rewrite
+                  ^/?tickets$
+                  http://github.com/okfn-brasil/suporte/issues
+                  break;
+                rewrite
+                  ^/?(?:(?:tic|ticket)/)?(\d+)$
+                  http://github.com/okfn-brasil/suporte/issues/$1
+                  break;
+                rewrite
+                  ^/?(.+)$
+                  http://github.com/okfn-brasil/suporte/$1
+                  break;
+        }
+
+        include snippets/ssl-oficial.news.conf;
+
+} #end server
+
+server {
+        server_name hackathons.ok.org.br;
+        location / { proxy_pass http://github.com/okfn-brasil/hackathons; }
+
+        include snippets/ssl-oficial.news.conf;
+}
+server {
+        server_name miniguias.ok.org.br;
+        location / { proxy_pass http://okfn-brasil.github.io/miniguias; }
+
+        include snippets/ssl-oficial.news.conf;
+
+}
+server {
+        server_name git.ok.org.br;
+        location / { proxy_pass http://github.com/okfn-brasil/; }
+
+        include snippets/ssl-oficial.news.conf;
+}
+server {
+        server_name identidade-digital.ok.org.br;
+        location / { proxy_pass http://okfn-brasil.github.io/identidade-digital; }
+
+        include snippets/ssl-oficial.news.conf;
+}
+
+
+server {
+        server_name api.ok.org.br;
+
+        root   /var/www/api.ok.org.br;
+        index  index.php index.html index.htm;
+
+        location / {
+                try_files $uri $uri/ @rewriteIt;
+                # try_files $uri $uri/ index.php?q=$uri;
+        }
+
+
+	location  @rewriteIt {
+		rewrite ^/?(issn|trazdia|getdoc)/
+                        /resolver.php?$uri            last;
+		rewrite ^/?getfrag($|/)
+			/frag-resolver.php?uri=$uri   last;
+		rewrite ^/?(.*)$
+			/error.php?$1                 last;
+	}
+
+        location ~ \.php$ {
+                try_files $uri =404;
+                include /etc/nginx/fastcgi.conf;
+                fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        }
+
+        include snippets/ssl-oficial.news.conf;
+} #end server
+
+
+server {
+        server_name baixar.ok.org.br file.ok.org.br;
+
+        location / {
+                try_files $uri $uri/ @proxy;
+        }
+
+        location @proxy {
+                rewrite
+                  ^/(.+?)\.(pdf|rss|txt|epub|docx?|odt|xml|csv)$
+                  https://github.com/okfn-brasil/oficial-backups/raw/master/docs/$1.$2
+                  break;
+        }
+
+        include snippets/ssl-oficial.news.conf;
+
+} #end server
+
+server {
+        server_name ver.ok.org.br view.ok.org.br;
+
+        root /var/www/readoc;
+        index index.html index.htm index.nginx-debian.html;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+
+        include snippets/ssl-oficial.news.conf;
+
+} #end server

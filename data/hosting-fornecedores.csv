@@ -1,0 +1,7 @@
+name,url,1cpu-name,1cpu-benchmark,refHost-CPUs,ref-HD-1Gb,ref-RAM-1Gb,ref-US$,ref-temEmail,refScoreAvg
+Linode,https://www.linode.com/,,?,,1,1,,,
+DigitalOcean,https://www.digitalocean.com/,vCPU,?,1,1,1,5,nao,? baixo
+Locaweb,https://www.locaweb.com.br/cloud/cloud-hosting/,,?,,1,1,,,
+Kinghost,https://king.host/cloud-web,,?,,1,1,,,
+Server4you,https://www.server4you.com/virtual-server,vCore,?,1,,,,,
+Webfaction, https://www.webfaction.com/,CPU core,?,2,,,9,tem,? alto?
