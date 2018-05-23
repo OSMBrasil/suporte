@@ -1,5 +1,7 @@
 # suporte
-Regras, datasets e tickets de suporte, para a gestão e transparência da Equipe de Suporte Tecnico da OSM-BR
+Regras, datasets e tickets de suporte, para a gestão e transparência da Equipe de Suporte Tecnico da OSM-BR.
+
+A "equipe suporte" existirá no contexto da [Associação](https://wiki.openstreetmap.org/wiki/WikiProject_Brazil/Associa%C3%A7%C3%A3o). <br/>PS: idea dos "tikets di suporte" foi [inspirada em experiência de sucesso](https://github.com/okfn-brasil/suporte/issues?utf8=✓&q=is%3Aissue++).
 
 -----
 
