@@ -12,17 +12,14 @@ apt install nginx
 # ver equiv. chown -R www-data:www-data /var/www
 #            chmod -R g+rw /var/www
 
-#PHP7, precisa?
-apt install php7.0 php7.0-mysql php7.0-mbstring php7.0-imap php7.0-mcrypt
+#PHP7.2 é automatico no ubuntu, basta dizer "php"
+apt install php  php-pgsql php-imap php-mcryp php-pear php-fpm php-zip php-curl php-xmlrpc php-gd php-mysql php-mbstring php-xml
 
-#Python3 (default??)
-apt install python3
+#Python3 (default!)
 
-
-#postgreSQL .. The v9.6 have many problems in UBUNTU 16 LST
-# apt install postgresql-9.5 postgresql-contrib-9.5 postgis-2.2
-# ja instalei v6
-#  apt install postgresql postgresql-contrib  postgis
+#postgreSQL .. The v10 is running with UBUNTU 18 LST
+apt install postgresql-10 postgis # or postgis-2.3
+# old apt install postgresql postgresql-contrib  postgis
 
 apt install python-pip     # uso geral
 pip install --upgrade pip

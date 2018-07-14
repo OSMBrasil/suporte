@@ -9,9 +9,15 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 echo '--- LOCALE do próprio shell inclusive, primeira tela * segunda tela C.UTF8 ---'
-# git
-sudo apt-get install git
+echo '--- (quanto ao grub, cuidando, manter o instalado)'
 
+## git veio junto, nao precisa mais
+#sudo apt-get install git
+read -p "Your e-mail for reference in git?"  themail
+
+git config --global user.email $themail
+
+## gambiarras lang, ainda precisa no ubuntu 18?
 export LANGUAGE=pt_BR.UTF-8
 export LANG=pt_BR.UTF-8
 locale-gen pt_BR.UTF-8

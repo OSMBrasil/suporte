@@ -1,0 +1,19 @@
+no final 
+Successfully installed pip-10.0.1
+Traceback (most recent call last):
+  File "/usr/bin/pip", line 9, in <module>
+    from pip import main
+ImportError: cannot import name main
+
+
+----
+problema de preparo, 
+psql -U postgres
+psql: FATAL:  Peer authentication failed for user "postgres"
+
+
+---- 
+pendencia de PostGIS
+https://postgis.net/install/
+(ver upgrade e modulos extra)
+
